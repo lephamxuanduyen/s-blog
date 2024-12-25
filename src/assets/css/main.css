@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-btn-color: #9283E0;
+    --default-text-color: #000000;
+    --passive-text-color: #9FA4AF;
+    --quote-text-color: #9283E0;
+    --hover-text-color: #FF5480;
+    --index-header: 10;
+}
