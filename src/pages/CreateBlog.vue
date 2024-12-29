@@ -14,4 +14,10 @@ import FormBlog from '../components/FormBlog.vue';
 .create-blog {
     margin: 40px 20% 0 20%;
 }
+
+@media (max-width: 800px) {
+    .create-blog {
+        margin: 40px 10% 0 10%;
+    }
+}
 </style>
