@@ -23,7 +23,7 @@ const props = defineProps({
 })
 const router = useRouter()
 const route = useRoute()
-const isValidData = false
+const isValidData = true
 
 const options = [
     {

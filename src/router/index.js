@@ -4,6 +4,7 @@ import CreateBlog from "../pages/CreateBlog.vue";
 import ReadingList from "../pages/ReadingList.vue";
 import Topics from "../pages/Topics.vue"
 import EditBlog from "../pages/EditBlog.vue";
+import DetailBlog from "../pages/DetailBlog.vue";
 
 const route = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,13 +45,24 @@ const route = createRouter({
             path: "/edit-blog/:id",
             name: "Edit Blog",
             component: EditBlog,
+            meta: {
+                title: "Edit Post | S-blog",
+            }
+        },
+        {
+            path: "/blogs/:id",
+            name: "Detail Blog",
+            component: DetailBlog,
+            meta: {
+                title: "Detail Blog | S-blog",
+            }
         }
         ,
         {
             path: "/notfound",
             name: "Not Found",
             meta: {
-                title: "Edit Post | S-blog",
+                title: "Not Found | S-blog",
             }
         },
     ]
