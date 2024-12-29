@@ -3,7 +3,7 @@ import { RichTextEditorComponent, Toolbar, Image, HtmlEditor, Link, Table, Quick
 export default {
     props: {
         label: String,
-        initialValue: String
+        initialValue: String,
     },
     components: {
         "ejs-richtexteditor": RichTextEditorComponent

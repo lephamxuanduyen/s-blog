@@ -51,4 +51,11 @@ onMounted(() => {
     line-height: 58px;
     letter-spacing: -0.08px;
 }
+
+.blogs {
+    padding: 0 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
 </style>

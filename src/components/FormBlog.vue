@@ -6,9 +6,23 @@ import SelectTopic from './BaseSelect.vue';
 import ImageInput from './ImageInput.vue';
 import Editor from './Editor.vue';
 import { uploadImage } from '../apis/image.api';
-import { postBlog } from '../apis/blog.api';
-import { useRouter } from 'vue-router';
+import { editBlog, postBlog } from '../apis/blog.api';
+import { useRoute, useRouter } from 'vue-router';
 import { toPage } from '../utils/navigate';
+
+const props = defineProps({
+    titlePage: String,
+    blog: {
+        type: Object,
+        default: {},
+    },
+    action: {
+        type: String,
+        default: "post"
+    },
+})
+const router = useRouter()
+const route = useRoute()
 
 const options = [
     {
@@ -53,54 +67,68 @@ const title = ref("")
 const desc = ref("")
 const author = ref("")
 const topic = ref("")
-const image = ref(null)
+const image = ref("")
 const content = ref("")
 
-const router = useRouter()
-
-const onUpload = (files) => {
-    image.value = files
+if (props.blog !== {}) {
+    title.value = props.blog.title
+    desc.value = props.blog.description
+    author.value = props.blog.author
+    topic.value = props.blog.topic
+    image.value = props.blog.imageCover
+    content.value = props.blog.contentHTML
 }
 
-const getTitleLength = () => title.value.length
+const onUpload = (files) => {
+    if (files) {
+        const formData = new FormData()
+        formData.append("file", files[0])
+        formData.append("upload_preset", "ml_default")
+        uploadImage(formData)
+            .then((res) => {
+                image.value = res.data.url
+            })
+            .catch((err) => alert("Something went Wrong!!!", err))
+    }
+}
+
+const getTitleLength = () => title.value ? title.value.length : 0
 
 const getContent = (html) => {
     content.value = html
 }
 
-const handelUploadImg = (file) => {
-    const formData = new FormData()
-    formData.append("file", file)
-    formData.append("upload_preset", "ml_default")
-    return uploadImage(formData)
-}
-
 const handelSubmit = () => {
-    let urlImage
-    if (image.value) {
-        urlImage = handelUploadImg(image.value[0])
-    }
-    else {
-        urlImage = ""
-    }
-    console.log(urlImage)
     const formData = {
         title: title.value,
         description: desc.value,
         author: author.value,
         topic: topic.value,
-        imageCover: urlImage,
+        imageCover: image.value,
         contentHTML: content.value,
         views: "0",
         likes: "0",
     }
-    try {
+    if (props.action === "post") {
         postBlog(formData)
-        console.log("Successfully!!!", formData)
-        toPage(router, "/")
+            .then(() => {
+                console.log("Created Successfully!!!", formData)
+                toPage(router, "/")
+            }
+            )
+            .then((err) => {
+                console.log(err)
+            })
     }
-    catch (err) {
-        console.log(err)
+    else if (props.action === "edit") {
+        const id = route.params.id
+        editBlog(id, formData)
+            .then(() => {
+                console.log("Edited Successfully!!!")
+                toPage(router, "/")
+            }
+            )
+            .catch((err) => console.log(err))
     }
 }
 
@@ -109,7 +137,7 @@ const handelSubmit = () => {
 
 <template>
     <div class="form-post">
-        <div class="title">Create Post</div>
+        <div class="title">{{ titlePage }}</div>
 
         <BaseInput v-model="title" label="Title" placeHolder="Title..." />
         <p class="title-length">{{ getTitleLength() }}/300</p>
@@ -121,7 +149,7 @@ const handelSubmit = () => {
 
         <ImageInput @upload="onUpload" label="Image Cover" />
 
-        <Editor @type="getContent" label="Content" />
+        <Editor @type="getContent" label="Content" :initialValue="blog.contentHTML" />
 
         <BaseButton title="Submit" @click="handelSubmit()" class="submit-btn" />
     </div>

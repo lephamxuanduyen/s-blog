@@ -1,12 +1,11 @@
 <script setup>
 import FormBlog from '../components/FormBlog.vue';
 
-
 </script>
 
 <template>
     <div class="create-blog">
-        <FormBlog />
+        <FormBlog titlePage="Create Post" />
         <div class="recent-post"></div>
     </div>
 </template>

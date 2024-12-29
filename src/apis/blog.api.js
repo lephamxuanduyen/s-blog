@@ -7,7 +7,7 @@ export const getBlogs = () => {
 
 export const postBlog = ( blog ) => {
   const URL = "blogs";
-  request.post(URL, blog)
+  return request.post(URL, blog)
 }
 
 export const deleteBlog = (id) => {
@@ -19,3 +19,8 @@ export const getDetailBlog = (id) => {
   const URL_BLOG_DETAIL = `blogs/${id}`;
   return request.get(URL_BLOG_DETAIL);
 };
+
+export const editBlog = (id, blog) => {
+  const URL_BLOG_DETAIL = `blogs/${id}`;
+  return request.put(URL_BLOG_DETAIL, blog);
+}
