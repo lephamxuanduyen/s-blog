@@ -25,13 +25,17 @@ const delBlog = (id) => {
             .catch((err) => console.log(err))
     }
 }
+
+const toDetailBlog = (id) => {
+    toPage(router, `/blogs/${id}`)
+}
 </script>
 
 <template>
     <div class="blog" v-for="blog in blogs" :key="blog.id">
-        <img :src="blog.imageCover" />
+        <img :src="blog.imageCover" @click="toDetailBlog(blog.id)" />
         <div class="card-content">
-            <div class="card-top">
+            <div class="card-top" @click="toDetailBlog(blog.id)">
                 <div class="info">
                     <span class="label">BY</span>
                     <span>{{ blog.author }}</span>
@@ -62,6 +66,7 @@ const delBlog = (id) => {
     aspect-ratio: 5/3;
     object-fit: cover;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .info {
@@ -96,6 +101,10 @@ const delBlog = (id) => {
     letter-spacing: -0.1px;
     color: var(--passive-text-color-001);
     text-align: justifyl
+}
+
+.blog .card-top {
+    cursor: pointer;
 }
 
 .blog .card-bottom {

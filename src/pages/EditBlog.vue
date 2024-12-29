@@ -15,7 +15,7 @@ const getBlogById = (id) => {
             blogDetail.value = res.data
         })
         .catch((err) => console.log(err))
-        .finally(loading.value = false)
+        .finally(() => loading.value = false)
 }
 
 onMounted(() => {
@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
     <div class="edit">
         <p v-if="loading">Loaing...</p>
-        <p v-else-if="blogDetail === null">Not Found</p>
+        <p v-else-if="blogDetail.value === null">Not Found</p>
         <FormBlog titlePage="Edit Blog" :blog="blogDetail" action="edit" v-else />
     </div>
 </template>
