@@ -15,10 +15,15 @@ const editBlog = (id) => {
 }
 
 const delBlog = (id) => {
-    alert("Are you sure")
-    deleteBlog(id)
-        .then(console.log("Deleted Successfully!!"))
-        .catch((err) => console.log(err))
+    const result = confirm("Are you sure")
+    if (result) {
+        deleteBlog(id)
+            .then(() => {
+                console.log("Deleted Successfully!!")
+                alert("Please Refresh!!!")
+            })
+            .catch((err) => console.log(err))
+    }
 }
 </script>
 

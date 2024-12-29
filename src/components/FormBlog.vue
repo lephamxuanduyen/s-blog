@@ -23,12 +23,9 @@ const props = defineProps({
 })
 const router = useRouter()
 const route = useRoute()
+const isValidData = false
 
 const options = [
-    {
-        id: "",
-        option: "Please choose a topic",
-    },
     {
         id: "1",
         option: "Inspiration",
@@ -99,36 +96,39 @@ const getContent = (html) => {
 }
 
 const handelSubmit = () => {
-    const formData = {
-        title: title.value,
-        description: desc.value,
-        author: author.value,
-        topic: topic.value,
-        imageCover: image.value,
-        contentHTML: content.value,
-        views: "0",
-        likes: "0",
-    }
-    if (props.action === "post") {
-        postBlog(formData)
-            .then(() => {
-                console.log("Created Successfully!!!", formData)
-                toPage(router, "/")
-            }
-            )
-            .then((err) => {
-                console.log(err)
-            })
-    }
-    else if (props.action === "edit") {
-        const id = route.params.id
-        editBlog(id, formData)
-            .then(() => {
-                console.log("Edited Successfully!!!")
-                toPage(router, "/")
-            }
-            )
-            .catch((err) => console.log(err))
+
+    if (isValidData) {
+        const formData = {
+            title: title.value,
+            description: desc.value,
+            author: author.value,
+            topic: options[parseInt(topic.value) - 1].option,
+            imageCover: image.value,
+            contentHTML: content.value,
+            views: "0",
+            likes: "0",
+        }
+        if (props.action === "post") {
+            postBlog(formData)
+                .then(() => {
+                    console.log("Created Successfully!!!", formData)
+                    toPage(router, "/")
+                }
+                )
+                .then((err) => {
+                    console.log(err)
+                })
+        }
+        else if (props.action === "edit") {
+            const id = route.params.id
+            editBlog(id, formData)
+                .then(() => {
+                    console.log("Edited Successfully!!!")
+                    toPage(router, "/")
+                }
+                )
+                .catch((err) => console.log(err))
+        }
     }
 }
 
