@@ -1,8 +1,10 @@
 <script setup>
+import DefaultLayout from './layouts/DefaultLayout.vue';
+
 </script>
 
 <template>
-  <p>Hello</p>
+  <DefaultLayout/>
 </template>
 
 <style scoped>
