@@ -31,11 +31,11 @@ onMounted(() => {
     <SearchBox />
     <div class="list-blog">
         <div class="title">ALL POST</div>
-    </div>
-    <div class="blogs">
-        <p v-if="loading">Loading...</p>
-        <p v-else-if="listBlogs.length === 0">Not Found</p>
-        <BlogCard v-else :blogs="listBlogs" />
+        <div class="blogs">
+            <p v-if="loading">Loading...</p>
+            <p v-else-if="listBlogs.length === 0">Not Found</p>
+            <BlogCard v-else :blogs="listBlogs" />
+        </div>
     </div>
 </template>
 
@@ -53,9 +53,31 @@ onMounted(() => {
 }
 
 .blogs {
-    padding: 0 20%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
+
+/* Điện thoại di động (dọc) */
+@media (max-width: 320px) {}
+
+/* Điện thoại di động (ngang) */
+@media (max-width: 480px) {}
+
+/* Máy tính bảng nhỏ (dọc) */
+@media (max-width: 600px) {
+    .blogs {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Máy tính bảng nhỏ (ngang) */
+@media (max-width: 800px) {
+    .list-blog {
+        margin: 0 10%;
+    }
+}
+
+/* Máy tính bảng lớn (dọc) */
+@media (max-width: 768px) {}
 </style>

@@ -66,13 +66,26 @@ onMounted(() => {
     letter-spacing: -0.112px;
 }
 
-
-
 .topics {
-    margin: 90px 0;
-    padding: 0 20%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    margin: 90px 20%;
+    display: flex;
+    flex-wrap: wrap;
     gap: 22px;
+}
+
+@media (max-width: 800px) {
+    .topics {
+        margin: 90px 10%;
+    }
+
+    .topics-container .topics-header {
+        padding: 50px 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    .topics {
+        flex-direction: column;
+    }
 }
 </style>

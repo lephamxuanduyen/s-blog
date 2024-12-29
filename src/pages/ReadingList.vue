@@ -9,4 +9,11 @@
 .reading-list {
     margin: 40px 20%;
 }
+
+/* Máy tính bảng nhỏ (ngang) */
+@media (max-width: 800px) {
+    .reading-list {
+        margin: 40px 10%;
+    }
+}
 </style>

@@ -35,4 +35,10 @@ onMounted(() => {
 .edit {
     margin: 40px 20%;
 }
+
+@media (max-width: 800px) {
+    .edit {
+        margin: 40px 10%;
+    }
+}
 </style>
