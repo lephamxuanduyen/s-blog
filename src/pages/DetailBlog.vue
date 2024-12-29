@@ -42,4 +42,10 @@ onMounted(() => {
     color: var(--passive-text-color);
     cursor: pointer;
 }
+
+@media (max-width: 800px) {
+    .back {
+        padding-left: 10%;
+    }
+}
 </style>

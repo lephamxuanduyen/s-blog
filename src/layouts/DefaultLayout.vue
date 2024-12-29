@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import Header from './Header.vue';
 import SideBar from './SideBar.vue';
+import Footer from './Footer.vue';
 import { ref } from 'vue';
 
 const isOpenSideBar = ref(false)
@@ -22,6 +23,7 @@ const toggleSidebar = () => {
         <RouterView />
     </div>
     <SideBar v-if="isOpenSideBar" @click="toggleSidebar" />
+    <Footer />
 </template>
 
 <style scoped></style>

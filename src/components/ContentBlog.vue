@@ -168,4 +168,14 @@ onMounted(
     margin: 40px 0;
     text-align: center;
 }
+
+@media (max-width: 800px) {
+    .detail-blog-container {
+        margin: 40px 10%;
+    }
+
+    .header {
+        padding: 40px 10% 0 10%;
+    }
+}
 </style>

@@ -6,7 +6,6 @@ import FormBlog from '../components/FormBlog.vue';
 <template>
     <div class="create-blog">
         <FormBlog titlePage="Create Post" />
-        <div class="recent-post"></div>
     </div>
 </template>
 
