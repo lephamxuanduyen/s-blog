@@ -26,4 +26,8 @@ const toggleSidebar = () => {
     <Footer />
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+    min-height: calc(100vh - 300px);
+}
+</style>

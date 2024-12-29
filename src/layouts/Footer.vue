@@ -30,6 +30,7 @@ footer {
 
 @media (max-width: 800px) {
     footer {
+        margin-top: auto;
         padding: 30px 10%;
     }
 }
