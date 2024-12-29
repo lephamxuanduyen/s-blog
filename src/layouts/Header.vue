@@ -106,16 +106,20 @@ header .logo,
 @media (max-width: 320px) {}
 
 /* Điện thoại di động (ngang) */
-@media (min-width: 321px) and (max-width: 480px) {}
+@media (max-width: 480px) {}
 
 /* Máy tính bảng nhỏ (dọc) */
-@media (min-width: 481px) and (max-width: 600px) {}
+@media (max-width: 600px) {}
 
 /* Máy tính bảng nhỏ (ngang) */
-@media (min-width: 601px) and (max-width: 800px) {}
+@media (max-width: 800px) {
+    header {
+        padding: 0 10%;
+    }
+}
 
 /* Máy tính bảng lớn (dọc) */
-@media (min-width: 801px) and (max-width: 768px) {}
+@media (max-width: 768px) {}
 
 /* Máy tính bảng lớn (ngang) */
 @media (max-width: 1024px) {
