@@ -23,7 +23,7 @@ const props = defineProps({
 })
 const router = useRouter()
 const route = useRoute()
-const isValidData = true
+let isValidData = true
 
 const options = [
     {
@@ -97,38 +97,42 @@ const getContent = (html) => {
 
 const handelSubmit = () => {
 
-    if (isValidData) {
-        const formData = {
-            title: title.value,
-            description: desc.value,
-            author: author.value,
-            topic: options[parseInt(topic.value) - 1].option,
-            imageCover: image.value,
-            contentHTML: content.value,
-            views: "0",
-            likes: "0",
+    const formData = {
+        title: title.value,
+        description: desc.value,
+        author: author.value,
+        topic: options[parseInt(topic.value) - 1].option,
+        imageCover: image.value,
+        contentHTML: content.value,
+        views: "0",
+        likes: "0",
+    }
+    if (props.action === "post") {
+
+        if (formData.title === "" || formData.description === "" || formData.author === "" || formData.topic === "" || formData.imageCover === "" || formData.contentHTML === "") {
+            isValidData = false
         }
-        if (props.action === "post") {
+        else {
             postBlog(formData)
                 .then(() => {
                     console.log("Created Successfully!!!", formData)
                     toPage(router, "/")
                 }
                 )
-                .then((err) => {
+                .catch((err) => {
                     console.log(err)
                 })
         }
-        else if (props.action === "edit") {
-            const id = route.params.id
-            editBlog(id, formData)
-                .then(() => {
-                    console.log("Edited Successfully!!!")
-                    toPage(router, "/")
-                }
-                )
-                .catch((err) => console.log(err))
-        }
+    }
+    else if (props.action === "edit") {
+        const id = route.params.id
+        editBlog(id, formData)
+            .then(() => {
+                console.log("Edited Successfully!!!")
+                toPage(router, "/")
+            }
+            )
+            .catch((err) => console.log(err))
     }
 }
 
@@ -151,11 +155,18 @@ const handelSubmit = () => {
 
         <Editor @type="getContent" label="Content" :initialValue="blog.contentHTML" />
 
+        <p class="alert" v-if="isValidData">Invalid Data</p>
+
         <BaseButton title="Submit" @click="handelSubmit()" class="submit-btn" />
     </div>
 </template>
 
 <style scoped>
+.form-post .alert {
+    color: red;
+    margin-top: 30px;
+}
+
 .form-post .title {
     font-size: 24px;
     font-weight: 600;
@@ -167,6 +178,10 @@ const handelSubmit = () => {
     line-height: 14px;
     color: var(--passive-text-color-001);
     margin-top: 10px;
+}
+
+.form-post {
+    margin-bottom: 40px;
 }
 
 .submit-btn {
