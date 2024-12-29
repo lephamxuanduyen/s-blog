@@ -2,7 +2,12 @@
 import { useRouter } from "vue-router"
 import IconLogo from "../assets/icons/IconLogo.vue"
 import BaseButton from "../components/BaseButton.vue";
+import IconMenu from '../assets/icons/IconMenu.vue'
 import { toPage } from "../utils/navigate";
+
+let isOpenMenu = false
+const emits = defineEmits(["isOpen"])
+
 const listNav = [
     {
         name: "New",
@@ -18,6 +23,11 @@ const listNav = [
     },
 ]
 
+const toggleSidebar = () => {
+    isOpenMenu = !isOpenMenu
+    emits('isOpen', isOpenMenu)
+}
+
 const router = useRouter()
 
 </script>
@@ -27,14 +37,29 @@ const router = useRouter()
         <div class="logo" @click="toPage(router, '/')">
             <IconLogo />
         </div>
-        <nav>
-            <div v-for="item in listNav" class="nav-item" @click='toPage(router, item.url)'>{{ item.name }}</div>
+        <div class="navigation">
+            <nav>
+                <div v-for="item in listNav" class="nav-item" @click='toPage(router, item.url)'>{{ item.name }}</div>
+            </nav>
+            <IconMenu class="menu" @click="toggleSidebar" />
             <BaseButton title="Create" @click="toPage(router, 'create-blog')" />
-        </nav>
+        </div>
     </header>
 </template>
 
 <style scoped>
+header .menu {
+    display: none;
+    cursor: pointer;
+}
+
+header .navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 76px;
+    align-items: center;
+}
+
 header {
     width: 100%;
     height: 150px;
@@ -75,5 +100,31 @@ nav {
 header .logo,
 .nav-item {
     cursor: pointer;
+}
+
+/* Điện thoại di động (dọc) */
+@media (max-width: 320px) {}
+
+/* Điện thoại di động (ngang) */
+@media (min-width: 321px) and (max-width: 480px) {}
+
+/* Máy tính bảng nhỏ (dọc) */
+@media (min-width: 481px) and (max-width: 600px) {}
+
+/* Máy tính bảng nhỏ (ngang) */
+@media (min-width: 601px) and (max-width: 800px) {}
+
+/* Máy tính bảng lớn (dọc) */
+@media (min-width: 801px) and (max-width: 768px) {}
+
+/* Máy tính bảng lớn (ngang) */
+@media (max-width: 1024px) {
+    nav {
+        display: none;
+    }
+
+    header .menu {
+        display: block;
+    }
 }
 </style>
