@@ -149,7 +149,7 @@ const handelSubmit = () => {
 
         <Editor @type="getContent" label="Content" :initialValue="blog.contentHTML" />
 
-        <p class="alert" v-if="isValidData">Invalid Data</p>
+        <p class="alert" v-if="!isValidData">Invalid Data</p>
 
         <BaseButton title="Submit" @click="handelSubmit()" class="submit-btn" />
     </div>
