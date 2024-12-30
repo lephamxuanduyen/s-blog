@@ -108,21 +108,15 @@ const handelSubmit = () => {
         likes: "0",
     }
     if (props.action === "post") {
-
-        if (formData.title === "" || formData.description === "" || formData.author === "" || formData.topic === "" || formData.imageCover === "" || formData.contentHTML === "") {
-            isValidData = false
-        }
-        else {
-            postBlog(formData)
-                .then(() => {
-                    console.log("Created Successfully!!!", formData)
-                    toPage(router, "/")
-                }
-                )
-                .catch((err) => {
-                    console.log(err)
-                })
-        }
+        postBlog(formData)
+            .then(() => {
+                console.log("Created Successfully!!!", formData)
+                toPage(router, "/")
+            }
+            )
+            .catch((err) => {
+                console.log(err)
+            })
     }
     else if (props.action === "edit") {
         const id = route.params.id
